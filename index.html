@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Offer Countdown</title>
+  <style>
+    #countdown {
+      font-family: Arial, sans-serif;
+      font-size: 24px;
+      color: #333;
+      text-align: center;
+      margin-top: 50px;
+    }
+  </style>
+</head>
+<body>
+  <div id="countdown">Loading...</div>
+
+  <script>
+    const offerEndTime = new Date('2025-01-17T16:00:00');
+
+    function updateCountdown() {
+      const now = new Date();
+      const timeLeft = offerEndTime - now;
+
+      if (timeLeft <= 0) {
+        document.getElementById('countdown').textContent = "Offer has ended!";
+        clearInterval(interval);
+        return;
+      }
+
+      const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+      if (days >= 1) {
+        document.getElementById('countdown').textContent = `${days} days remaining`;
+      } else {
+        document.getElementById('countdown').textContent = 
+          `${hours}h ${minutes}m ${seconds}s remaining`;
+      }
+    }
+
+    const interval = setInterval(updateCountdown, 1000);
+
+    updateCountdown();
+  </script>
+</body>
+</html>
